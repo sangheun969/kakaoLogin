@@ -7,7 +7,33 @@
     <link rel="stylesheet" href="/info.css" />
   </head>
   <body>
-    <h2>{{ nickname }} 환영합니다</h2>
-    <img src="{{ profile_image }}" alt="Profile Image" class="myProfile" />
+    <div id="container">
+      <header>
+        <div class="title">
+          <h1>야홋</h1>
+          <h4>{{ nickname }}</h4>
+          <!-- <div class="btn">
+            {% if user %}
+            <div class="userName">
+              <h4>{{ nickname }}</h4>
+            </div>
+            <a href="/users/logout" class="btnDev">로그아웃</a>
+
+            <a href="/users/getuserInfo" class="btnDev">회원정보</a>
+
+            {% else %}
+            <a href="/users/login" class="btnDev">로그인</a>
+
+            <a href="/users/userCreate" class="btnDev">회원가입</a>
+
+            {% endif %}
+          </div> -->
+        </div>
+      </header>
+      <div id="userProfile">
+        <p class="test"><span>{{ nickname }} 환영합니다</span></p>
+        <img src="{{ profile_image }}" alt="Profile Image" class="myProfile" />
+      </div>
+    </div>
   </body>
 </html>
