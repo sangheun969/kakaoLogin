@@ -38,7 +38,7 @@ app.get("/auth/kakao", (req, res) => {
   console.log(kakaoAuthURL);
 });
 
-app.get("/auth/kakao/callback", async (req, res) => {
+app.get("/auth/kakao/callback", async (req, res, next) => {
   let token;
   try {
     token = await axios({
@@ -68,8 +68,7 @@ app.get("/auth/kakao/callback", async (req, res) => {
       },
     });
   } catch (e) {
-    console.error("Kakao API 사용자 정보 요청 오류:", e.response.data);
-    return res.status(e.response.status).send("Kakao API 오류");
+    next(e);
   }
   req.session.kakao = user.data;
   console.log(user);
