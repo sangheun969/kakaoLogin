@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/layout.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <form method="post" action="/auth/info" class="login">
+        <!-- <h1><a href="/">로그인</a></h1> -->
+        <h2>User Login</h2>
+        <div class="login_id">
+          <input
+            type="email"
+            placeholder="Email"
+            id="myId"
+            name="userEmail"
+            onblur="printEmail()"
+          />
+          <span id="email_check" class="warn_text"
+            >유요한 이메일 주소를 입력해주세요.</span
+          >
+        </div>
+        <div class="login_pw">
+          <input
+            type="password"
+            placeholder="Password"
+            id="myPW"
+            name="userPassword"
+            onblur="printPw()"
+          />
+        </div>
+        <span id="pw_check" class="warn_text"> 6~15자 이내로 입력하세요.</span>
+        <div class="login_sub">
+          <input type="submit" value="submit" id="myLogin" />
+        </div>
+        <h4>OR</h4>
+        <div class="CreatId">
+          <p>Don't have account?<a href="/users/userCreate">singn-up Now</a></p>
+        </div>
+        <div class="simpleLogin">
+          <p>simple authentication login</p>
+          <div class="kakaoLogin">
+            <a href="/auth/info">
+              <img src="/img/카톡이모티콘.png" alt="" class="kakaoIcon"
+            /></a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      function printEmail() {
+        const email = document.getElementById("myId");
+        const email_check = document.getElementById("email_check");
+
+        if (!isEmail(email.value)) {
+          email.style.borderColor = "#EF444";
+          email_check.style.visibility = "visible";
+        } else {
+          email.style.borderColor = "#9CA3AF";
+          email_check.style.visibility = "hidden";
+
+          btnCheck();
+        }
+      }
+
+      function isEmail(asValue) {
+        let regExp =
+          // '@' 포함여부와 대문자,소문자를 구분하지않게 표현식끝에 i 사용
+          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+        return regExp.test(asValue);
+      }
+
+      function printPw() {
+        const pw = document.getElementById("myPW");
+        const pw_check = document.getElementById("pw_check");
+
+        if (pw.value.length < 6 || pw.value.length > 15) {
+          pw.style.borderColor = "#EF4444";
+          pw_check.style.visibility = "visible";
+        } else {
+          pw.style.borderColor = "#9CA3AF";
+          pw_check.style.visibility = "hidden";
+        }
+        btnCheck();
+      }
+
+      function btnCheck() {
+        const email = document.getElementById("myId").value;
+        const pw = document.getElementById("myPW");
+        const login_btn = document.getElementById("myLogin");
+        if (isEmail(email) && pw.value.length >= 6 && pw.value.length <= 15) {
+          login_btn.disabled = false;
+        } else {
+          login_btn.disabled = true;
+        }
+      }
+    </script>
+  </body>
+</html>

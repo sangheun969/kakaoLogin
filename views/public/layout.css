@@ -1,0 +1,102 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+.wrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, rgb(47, 27, 64), rgb(90, 27, 101));
+}
+
+.login {
+  width: 30%;
+  height: 600px;
+  background: rgb(251, 251, 249);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 a {
+  color: rgb(216, 6, 6);
+}
+
+h2 {
+  color: rgb(143, 48, 48);
+}
+
+.login_id,
+.login_pw {
+  margin-top: 10px;
+  width: 80%;
+}
+
+.login_id input,
+.login_pw input {
+  width: 100%;
+  height: 50px;
+  border-radius: 1rem;
+  margin-top: 10px;
+  padding: 0px 20px;
+  border: 1px solid black;
+  outline: none;
+}
+
+.login_sub {
+  margin-top: 30px;
+  width: 80%;
+  border: 0;
+}
+
+.login_sub input {
+  width: 100%;
+  height: 50px;
+  border-radius: 1rem;
+  background: linear-gradient(to left, rgb(102, 48, 110), rgb(136, 15, 120));
+  color: white;
+  font-size: 1.2rem;
+}
+
+.login_sub input:hover {
+  background: rgb(230, 61, 112);
+}
+
+button {
+  box-sizing: border-box;
+  padding: 10px 150px;
+  border-radius: 10px;
+  background: rgb(233, 180, 180);
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.warn_text {
+  visibility: hidden;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ef4444;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+#myLogin:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.kakaoLogin a img {
+  width: 40px;
+  height: 40px;
+}
+.kakaoIcon {
+  width: 100%;
+}
