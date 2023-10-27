@@ -6,3 +6,11 @@
 body {
   background: linear-gradient(45deg, rgb(47, 27, 64), rgb(90, 27, 101));
 }
+
+h2 {
+  color: aliceblue;
+}
+
+.myProfile {
+  width: 110px;
+}

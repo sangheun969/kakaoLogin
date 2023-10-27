@@ -17,8 +17,9 @@ nunjucks.configure("views", {
 app.use(
   session({
     secret: "ras",
-    resave: false, // false로 변경
-    saveUninitialized: true, // true로 변경
+    resave: true,
+    secure: false,
+    saveUninitialized: false,
   })
 );
 
@@ -27,10 +28,14 @@ const kakao = {
   clientSecret: process.env.CLIENTSECRET,
   redirectUri: process.env.REDIRECTURI,
 };
+app.get("/", (req, res) => {
+  res.render("layout");
+});
 
 app.get("/auth/kakao", (req, res) => {
-  const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&scope=profile,account_email`;
+  const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code`;
   res.redirect(kakaoAuthURL);
+  console.log(kakaoAuthURL);
 });
 
 app.get("/auth/kakao/callback", async (req, res) => {
@@ -63,13 +68,13 @@ app.get("/auth/kakao/callback", async (req, res) => {
       },
     });
   } catch (e) {
-    res.json(e.data);
+    console.error("Kakao API 사용자 정보 요청 오류:", e.response.data);
+    return res.status(e.response.status).send("Kakao API 오류");
   }
-
   req.session.kakao = user.data;
   console.log(user);
 
-  res.send("success");
+  res.redirect("/auth/info");
 });
 
 app.get("/auth/info", (req, res) => {
@@ -83,10 +88,6 @@ app.get("/auth/info", (req, res) => {
     nickname,
     profile_image,
   });
-});
-
-app.get("/", (req, res) => {
-  res.render("layout");
 });
 
 app.listen(3000, () => {
