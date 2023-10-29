@@ -4,10 +4,12 @@ const nunjucks = require("nunjucks");
 const axios = require("axios");
 const qs = require("qs");
 const session = require("express-session");
+const router = require("./src/route");
 require("dotenv").config();
 
 app.set("view engine", "html");
 
+app.use(router);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("views/public"));
@@ -89,6 +91,4 @@ app.get("/auth/info", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(`server start 3000`);
-});
+module.exports = app;
